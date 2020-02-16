@@ -1,0 +1,58 @@
+.userface{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.userface-name{
+    height: 50px;
+    background-color: wheat;
+}
+
+.empty{
+    height: 100px;
+    background-color: wheat;
+}
+
+.sp{
+    margin: 20px;
+    font-size: 20px;
+}
+
+.empty1{
+    height: 10px;
+}
+
+.container .container1{
+    height: 20px;
+    background-color: white;
+}
+
+.container .container1 .text{
+    color: black;
+}
+
+.video_pic{
+    width: 150px;
+    height: 150px;
+    float: left;
+}
+
+.title-group{
+    position: relative;
+    text-align: center;
+    color: black;
+    font-weight: 8px;
+}
+
+.list{
+    width: 150px;
+}
+
+.form-group{
+    margin: 0 auto;
+}
+
+.empty3{
+    height: 10px;
+}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{%block head%}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/person.css')}}">
+{%endblock%}
+{%block title%}个人主页{%endblock%}
+{%block main%}
+    <div class="empty container"></div>
+    <div class="userface-name container">
+        <i>
+            <img class="userface" src="{{url_for('static',filename='images/'+user.avatar)}} ">
+        </i>
+        <i class="username">
+            {{user.username}}
+        </i>
+    </div>
+    <div class="empty1"></div>
+    <div class="container">
+        <div class="container1">
+          <span class="sp"><a href="/my_video/">投稿</a></span>
+          <span class="sp"><a href="/my_collect/">收藏</a></span>
+          <span class="sp"><a href="/my_thumb/">点赞</a></span>
+          <span class="sp"><a href="/imformation/">个人信息</a></span>
+          <span class="sp"><a href="/all_imformation/">所有用户信息</a></span>
+        </div>
+    </div>
+    <div>
+        {% for user in users %}
+            <div class="container">
+                <hr>
+            <span class="sp">用户ID:{{user.id}} </span>
+            <span class="sp">手机号码:{{user.telephone}} </span>
+            <span class="sp">用户名:{{user.username}} </span>
+            <span class="sp">角色:{{user.role}} </span>
+            <span class="sp">密码:{{user.password}} </span>
+            <span class="sp">头像:{{user.avatar}} </span>
+            <form action="{{url_for('delete_user')}} " method="post">
+                <div class="form-group">
+                    <input type="hidden" name="user_id" value="{{user.id}} ">
+                </div>
+                {% if user.id != id %}
+                <div class="form-group" style="text-align: right;">
+                    <button class="btn btn-primary">删除</button>
+                </div>
+                {% endif %}
+            </form>
+            <hr>
+            </div>
+        {% endfor %}
+    </div>
+{%endblock%}

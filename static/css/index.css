@@ -1,0 +1,40 @@
+.video_pic{
+    width: 150px;
+    height: 150px;
+    float: left;
+}
+
+.title-group{
+    position: relative;
+    text-align: center;
+    color: black;
+    font-weight: 8px;
+}
+
+.list{
+    width: 150px;
+    float: left;
+    margin-left: 30px;
+    margin-bottom: 15px;
+}
+
+.empty1{
+    height: 160px;
+    background-color: wheat;
+}
+
+.empty2{
+    height: 20px;
+    background-color: white;
+}
+
+.tips{
+    float: left;
+    width: 60px;
+}
+
+.page{
+    position: fixed;
+    bottom: 0px;
+    text-align: center;
+}

@@ -1,0 +1,54 @@
+.userface{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.page{
+    position: fixed;
+    bottom: 0px;
+    text-align: center;
+}
+
+.comment-list{
+    padding-left: 0%;
+}
+
+.comment-list li{
+    list-style: none;
+    border-bottom: 1px solid #eeeeee;
+    padding-top: 10px;
+}
+
+.userface{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.user-info{
+    font-size: 16px;
+    color: #9b9b9b;
+    line-height: 40px;
+}
+
+.user-info .username{
+    margin-left: 20px;
+}
+
+.user-info .create-time{
+    float: right;
+}
+
+.content{
+    margin-left: 60px;
+}
+
+.video-info{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.author{
+    margin-left: 45px;
+}

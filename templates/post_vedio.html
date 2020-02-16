@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.6/css/fileinput.min.css"/>
+<script src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.6/js/fileinput.min.js"></script>
+{% endblock %}
+{% block main %}
+<form style="width: 600px;"class="avatar-input-form container" method="POST" enctype="multipart/form-data">
+    <input name="video_upload" type="file" class="file" data-show-preview="true"/>
+    <input type="text" class="form-control" placeholder="视频标题" name="title">
+    <input name="pic_upload" type="file" class="file" data-show-preview="true"/>
+
+
+    <label>视频类别: <input type="radio" name="num" value="学习" /> 学习 
+                    <input type="radio" name="num" value="游戏" /> 游戏 
+                    <input type="radio" name="num" value="明星" /> 明星 
+                    <input type="radio" name="num" value="萌宠" /> 萌宠
+                    <input type="radio" name="num" value="动漫" /> 动漫 
+                    <input type="radio" name="num" value="鬼畜" /> 鬼畜 </label>
+
+       <button class="btn btn-primary btn-block">确认上传</button>
+</form>
+{% endblock %}

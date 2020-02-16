@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{%block title%}首页{%endblock%}
+{%block head%}
+<link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+{%endblock%}
+{%block main%}
+    <div class="empty1 container"></div>
+            <div class="container">
+                <div class="tips"><a href="{{url_for('index')}}">全部</a></div>
+                <div class="tips"><a href="{{url_for('tip_study')}}">学习</a></div>
+                <div class="tips"><a href="{{url_for('tip_game')}}">游戏</a></div>
+                <div class="tips"><a href="{{url_for('tip_star')}}">明星</a></div>
+                <div class="tips"><a href="{{url_for('tip_pet')}}">萌宠</a></div>
+                <div class="tips"><a href="{{url_for('tip_anime')}}">动漫</a></div>
+                <div class="tips"><a href="{{url_for('tip_fun')}}">鬼畜</a></div>
+            </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        </div><!-- /.container-fluid -->
+        <ul class="video-list-group container">
+            {% for video in videos %}
+                <div  class="list">
+                        <div class="pic-group">
+                            <a href="{{url_for('detail', video_id=video.id)}}">
+                                <img class="video_pic" src="{{url_for('static',filename='images/'+video.pic_filename)}}">
+                            <div class="title-group">
+                                {{video.title}}
+                            </div>
+                            </a>
+                            {% if user_role == 'adm' %}
+                            <form action="{{url_for('delete')}} " method="post">
+                                <div class="form-group">
+                                    <input type="hidden" name="video_id" value="{{video.id}} ">
+                                </div>
+                                <div class="form-group" style="text-align: right;">
+                                    <button class="btn btn-primary">删除</button>
+                                </div>
+                            </form>
+                            {% endif %}
+                        </div> 
+                </div>
+            {% endfor %}
+        </ul>
+    {%endblock%}

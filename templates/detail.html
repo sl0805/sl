@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block title %}详情{% endblock %}
+{% block head %}
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer@1.25.0/dist/DPlayer.min.css">
+<style>
+    #dplayer{
+        max-width: 960px;
+        height: 620px;
+        margin: 0 auto;
+    }
+</style>
+<link rel="stylesheet" href="{{url_for('static', filename='css/detail.css')}}">
+{% endblock %}
+{% block main %}
+<div class="video-info" style="margin: 0 auto;">
+    <h3 class="title">{{video.title}}</h3>
+    <p class="video-imfo">
+    <span class="author"><a href="{{url_for('showtime',author_id=video.author.id,author=video.author.username)}}"> 作者:{{video.author.username}}</a></span>
+    <span class="author">时间:{{video.create_time}}</span>
+    </p>
+</div>
+<hr>
+<div class="media">
+    <div id="dplayer"></div>
+    <script src="https://cdn.jsdelivr.net/npm/dplayer@1.25.0/dist/DPlayer.min.js"></script>
+    <script>
+        var dp = new DPlayer({
+            container: document.getElementById('dplayer'),
+            screenshot: true,
+            video: {
+                url: '{{url_for("static", filename="video/"+video.video_filename)}}',
+                pic: '{{url_for("static", filename="images/"+video.pic_filename)}}',
+                thumbnails: '{{url_for("static", filename="images/"+video.pic_filename)}}',
+            },
+            subtitle: {
+                url: 'webvtt.vtt',
+            },
+            danmaku: {
+                id: 'demo',
+                api: 'https://api.prprpr.me/dplayer/',
+            },
+        });
+    </script>
+</div>
+<form action="{{url_for('collect')}} " method="post">
+    <div class="form-group">
+        <input type="hidden" name="video_id" value="{{video.id}} ">
+    </div>
+    <div class="form-group" style="text-align: right;">
+        <button class="btn btn-primary">收藏</button>
+        <i>{{video.collect_num}} </i>
+    </div>
+</form>
+<form action="{{url_for('thumb')}} " method="post">
+    <div class="form-group">
+        <input type="hidden" name="video_id" value="{{video.id}}">
+    </div>
+    <div class="form-group" style="text-align: right;">
+        <button class="btn btn-primary">点赞</button>
+        <i>{{video.thumb_num}} </i>
+    </div>
+</form>
+<hr>
+<h4>评论:</h4>
+    <form action="{{url_for('add_comment')}} " method="post">
+        <div class="form-group">
+            <input name="comment_content" type="text" class="form-control" placeholder="请填写评论">
+            <input type="hidden" name="video_id" value="{{video.id}} ">
+        </div>
+        <div class="form-group" style="text-align: right;">
+            <button class="btn btn-primary">评论</button>
+        </div>
+    </form>
+    <ul class="comment-list">
+        {% for comment in comments %}
+        <li>
+            <div class="user-info">
+                <img class="userface" src="{{url_for('static', filename='images/'+comment.author.avatar)}}" alt="">
+                <span class="username">{{comment.author.username}}</span>
+                <span class="create-time">{{comment.create_time}}</span>
+            </div>
+            <p class="content">{{comment.content}}</p>
+            {% if user_role == 'adm' %}
+                        <form action="{{url_for('delete_comment',video_id=video.id)}} " method="post">
+                            <div class="form-group">
+                                <input type="hidden" name="comment_id" value="{{comment.id}} ">
+                            </div>
+                            <div class="form-group" style="text-align: right;">
+                                <button class="btn btn-primary">删除</button>
+                            </div>
+                        </form>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="page container">
+        <div>
+            总页数:{{paginate.pages}}
+            当前页数：{{paginate.page}}
+        </div>
+        <div>
+            {% if paginate.has_prev %}
+            <a href="/detail/{{video.id}}/?page={{paginate.prev_num}}">上一页</a>
+            {% endif %}
+            {% for i in paginate.iter_pages() %}
+            <a href="/detail/{{video.id}}/?page={{i}}">{{i}}</a>
+            {% endfor %}
+            {% if paginate.has_next %}
+            <a href="/detail/{{video.id}}/?page={{paginate.next_num}}">下一页</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

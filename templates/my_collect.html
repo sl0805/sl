@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{%block head%}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/person.css')}}">
+{%endblock%}
+{%block title%}个人主页{%endblock%}
+{%block main%}
+    <div class="empty container"></div>
+    <div class="userface-name container">
+        <i>
+            <img class="userface" src="{{url_for('static',filename='images/'+user.avatar)}} ">
+        </i>
+        <i class="username">
+            {{user.username}}
+        </i>
+    </div>
+    <div class="empty1"></div>
+    <div class="container">
+        <div class="container1">
+          <span class="sp"><a href="/my_video/">投稿</a></span>
+          <span class="sp"><a href="/my_collect/">收藏</a></span>
+          <span class="sp"><a href="/imformation/">个人信息</a></span>
+          {% if user.role == 'adm' %}
+          <span class="sp"><a href="/all_imformation/">所有用户信息</a></span>
+          {% endif %}
+        </div>
+    </div>
+    <ul class="video-list-group container">
+        {% for collect in collects %}
+        {% if collect.video != None %}
+            <div  class="list">
+                    <div class="pic-group">
+                        <a href="{{url_for('detail', video_id=collect.video.id)}}">
+                            <img class="video_pic" src="{{url_for('static',filename='images/'+collect.video.pic_filename)}}">
+                        <div class="title-group">
+                            {{collect.video.title}}
+                        </div>
+                        </a>
+                    </div> 
+            </div>
+        {% endif %}
+        {% endfor %}
+    </ul>
+{%endblock%}
